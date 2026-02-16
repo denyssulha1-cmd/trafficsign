@@ -3,3 +3,4 @@ gunicorn==21.2.0
 numpy
 opencv-python
 pillow
+onnxruntime==1.15.1
