@@ -1,7 +1,6 @@
-pip>=26.0.1
 Django>=5.0
 gunicorn==21.2.0
-numpy>=1.23,<1.26
-Pillow>=10.0.0
+numpy
+pillow
 opencv-python
-onnxruntime==1.15.1
+onnxruntime==1.27.0
