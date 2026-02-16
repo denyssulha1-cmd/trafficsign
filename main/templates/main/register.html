@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація користувача</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/register.css' %}">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="{% url 'home' %}">Головна</a>
+        <a href="{% url 'about' %}">Про сайт</a>
+        <a href="{% url 'login' %}">Увійти</a>
+        <a href="{% url 'history' %}">Історія</a>
+<a href="{% url 'feedbacks' %}">Коментарі</a>	
+		<div class="user-status">
+            {% if user.is_authenticated %}
+                <span>Вітаємо, {{ user.last_name }} {{ user.first_name }}</span>
+            {% else %}
+                <span>Ви не ввійшли</span>
+            {% endif %}
+    </nav>
+</header>
+
+<div class="auth-container">
+    <h2>Створення акаунта</h2>
+    <form method="post" id="register-form">
+        {% csrf_token %}
+        <input type="text" name="surname" placeholder="Прізвище" required>
+        <input type="text" name="nameuser" placeholder="Ім'я" required>
+
+        <!-- === Логін === -->
+        <input type="text" name="username" id="username" placeholder="Логін" required>
+        <small id="username-error" class="error-text"></small>
+
+        <input type="email" name="email" placeholder="Електронна пошта" required>
+
+        <!-- === Паролі === -->
+        <div class="password-wrapper">
+            <input type="password" id="password1" name="password1" placeholder="Пароль" required>
+            <span class="toggle-password" onclick="togglePassword('password1', this)">👁️</span>
+        </div>
+
+        <div class="password-wrapper">
+            <input type="password" id="password2" name="password2" placeholder="Підтвердіть пароль" required>
+            <span class="toggle-password" onclick="togglePassword('password2', this)">👁️</span>
+        </div>
+
+        <small id="password-error" class="error-text"></small>
+
+        <button type="submit" class="btn-login">Зареєструватися</button>
+    </form>
+    <p>Вже маєте акаунт? <a href="{% url 'login' %}">Увійти</a></p>
+</div>
+
+<footer>
+    <p>© 2025 Розпізнавання дорожніх знаків</p>
+</footer>
+
+<script>
+// === Показ / приховування пароля ===
+function togglePassword(id, el) {
+    const field = document.getElementById(id);
+    if (field.type === "password") {
+        field.type = "text";
+        el.textContent = "🙈";
+    } else {
+        field.type = "password";
+        el.textContent = "👁️";
+    }
+}
+
+// === Перевірка унікальності логіну та довжини ===
+document.getElementById('username').addEventListener('blur', function() {
+    const username = this.value.trim();
+    const errorField = document.getElementById('username-error');
+
+    if (username.length < 6) {
+        errorField.textContent = "Логін має містити щонайменше 6 символів!";
+        return;
+    }
+
+    fetch(`/check_username/?username=${username}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.exists) {
+                errorField.textContent = "Такий логін уже існує!";
+            } else {
+                errorField.textContent = "";
+            }
+        });
+});
+
+// === Перевірка паролів у реальному часі ===
+const pass1 = document.getElementById('password1');
+const pass2 = document.getElementById('password2');
+const passError = document.getElementById('password-error');
+
+function validatePassword() {
+    const password = pass1.value;
+    const confirm = pass2.value;
+
+    // Регулярний вираз для перевірки складності
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*_\-]).{8,}$/;
+
+    if (!regex.test(password)) {
+        passError.textContent = "Пароль має містити щонайменше 8 символів, 1 велику, 1 малу літеру, 1 цифру та 1 спецсимвол.";
+        return false;
+    } else if (confirm && password !== confirm) {
+        passError.textContent = "Паролі не співпадають!";
+        return false;
+    } else {
+        passError.textContent = "";
+        return true;
+    }
+}
+
+pass1.addEventListener('input', validatePassword);
+pass2.addEventListener('input', validatePassword);
+
+// === Перевірка при відправці форми ===
+document.getElementById('register-form').addEventListener('submit', function(e) {
+    const usernameError = document.getElementById('username-error').textContent;
+    const validPass = validatePassword();
+
+    if (usernameError || !validPass) {
+        e.preventDefault();
+        alert("Будь ласка, виправте помилки перед реєстрацією!");
+        return false;
+    }
+});
+</script>
+</body>
+</html>

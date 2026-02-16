@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Розпізнавання знаків</title>
+	    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/recognize.css' %}">
+</head>
+<body>
+    <!-- === Шапка === -->
+    <header>
+        <nav>
+            <a href="{% url 'home' %}">Головна</a>
+            <a href="{% url 'about' %}">Про сайт</a>
+            <a href="{% url 'logout' %}">Вийти</a>
+<a href="{% url 'history' %}">Історія</a>
+<a href="{% url 'feedbacks' %}">Коментарі</a>	
+        </nav>
+    </header>
+
+    <!-- === Основний блок === -->
+    <main class="recognize-container">
+        <h2>Розпізнавання дорожніх знаків</h2>
+        <p>Завантажте фото дорожнього знака, щоб система виконала автоматичне розпізнавання.</p>
+
+        {% if error %}
+            <div class="error-msg">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data" class="upload-form">
+            {% csrf_token %}
+            
+            <input type="file" name="photo" accept="image/*" required>
+
+            <button type="submit" class="btn-recognize">🔍 Розпізнати</button>
+        </form>
+
+        {% if success %}
+            <div class="result-box">
+                <h3>✅ Результат розпізнавання</h3>
+                <p><strong>Назва:</strong> {{ name_sign }}</p>
+                <p><strong>Точність:</strong> {{ accuracy }}%</p>
+
+                {% if photo_url %}
+                    <img src="{{ photo_url }}" alt="Фото знака">
+                {% endif %}
+            </div>
+        {% endif %}
+    </main>
+
+    <!-- === Футер === -->
+    <footer>
+        <p>© 2025 Розпізнавання дорожніх знаків</p>
+    </footer>
+</body>
+</html>

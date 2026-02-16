@@ -1,0 +1,202 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #e6f0ff 0%, #ffffff 100%);
+    color: #222;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === Шапка сайту === */
+header {
+    background: #005bbb;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: #ffd500;
+    transition: width 0.3s;
+}
+
+nav a:hover {
+    color: #ffd500;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* === Основні стилі сторінки "Про сайт" === */
+.about-container {
+    flex: 1;
+    padding: 60px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Заголовки */
+.about-container h1, 
+.about-container h2 {
+    text-align: center;
+    color: #003f7d;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.about-container h1 {
+    font-size: 40px;
+}
+
+.about-container h2 {
+    font-size: 28px;
+    margin-top: 50px;
+}
+
+/* Текст */
+.about-container p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 30px;
+}
+
+/* === Блок технологій === */
+.tech-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.tech-item {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(0,91,187,0.15);
+    padding: 25px;
+    width: 220px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tech-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,91,187,0.25);
+}
+
+/* Зображення технологій */
+.tech-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #005bbb;
+    background: #f2f6fc;
+}
+
+/* Кнопка */
+.about-cta {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.about-cta h2 {
+    margin-bottom: 20px;
+}
+
+.btn-start {
+    display: inline-block;
+    background: #005bbb;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 18px;
+    text-decoration: none;
+    transition: 0.3s;
+    box-shadow: 0 3px 10px rgba(0,91,187,0.3);
+}
+
+.btn-start:hover {
+    background: #004999;
+    box-shadow: 0 4px 12px rgba(0,91,187,0.4);
+    transform: translateY(-2px);
+}
+
+/* === Футер === */
+footer {
+    background: #003f7d;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+    margin-top: auto;
+}
+footer p{
+    color: white;
+}
+.user-status {
+    display: flex;
+    justify-content: flex-end;  /* вирівнює текст праворуч */
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 20px;
+    border-radius: 20px;
+    box-shadow: inset 0 0 5px rgba(255,255,255,0.2);
+    min-width: 250px; /* щоб блок не стискався */
+}
+
+/* стиль саме для тексту */
+.user-status span {
+    flex: 1;
+    color: #ffcc00; /* жовтий акцент */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    transition: color 0.3s, transform 0.3s;
+}
+
+.user-status span:hover {
+    color: #fff;
+    transform: scale(1.05);
+}

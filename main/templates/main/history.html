@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Історія розпізнавання</title>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <link rel="stylesheet" href="{% static 'main/history.css' %}">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="{% url 'home' %}">Головна</a>
+        <a href="{% url 'about' %}">Про сайт</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Вийти</a>
+        {% else %}
+            <a href="{% url 'login' %}">Увійти</a>
+        {% endif %}
+	<a href="{% url 'history' %}" class="active">Історія</a>
+<a href="{% url 'feedbacks' %}">Коментарі</a>	
+        <div class="user-status">
+            {% if user.is_authenticated %}
+                <span>Вітаємо, {{ user.last_name }} {{ user.first_name }}</span>
+            {% else %}
+                <span>Ви не ввійшли</span>
+            {% endif %}
+
+        </div>
+    </nav>
+</header>
+
+<main class="history-container">
+    <h2>Історія розпізнавання знаків</h2>
+
+    {% if history %}
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Зображення</th>
+                    <th>Назва знаку</th>
+                    <th>Точність (%)</th>
+                    <th>Дата</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in history %}
+                <tr>
+                    <td><img src="{{ item.image.url }}" alt="{{ item.sign_name }}" class="sign-img"></td>
+                    <td>{{ item.sign_name }}</td>
+                    <td>{{ item.accuracy|floatformat:2 }}</td>
+                    <td>{{ item.date|date:"d.m.Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-data">Ви ще не розпізнавали жодного знаку.</p>
+    {% endif %}
+</main>
+
+<footer>
+    <p>© 2025 Розпізнавання дорожніх знаків</p>
+</footer>
+</body>
+</html>

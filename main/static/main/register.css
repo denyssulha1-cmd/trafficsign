@@ -1,0 +1,36 @@
+.auth-container {
+    max-width: 420px;
+    margin: 100px auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    width: 100%;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+    font-size: 18px;
+}
+
+.error-text {
+    color: red;
+    font-size: 14px;
+    display: block;
+    text-align: left;
+    margin-top: -8px;
+    margin-bottom: 8px;
+}

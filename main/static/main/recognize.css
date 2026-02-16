@@ -1,0 +1,119 @@
+/* === Стилі сторінки розпізнавання знаків === */
+.recognize-container {
+    max-width: 700px;
+    margin: 100px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.recognize-container h2 {
+    font-size: 32px;
+    color: #003f7d;
+    margin-bottom: 25px;
+}
+
+.recognize-container p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* === Форма завантаження === */
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.upload-form input[type="file"] {
+    padding: 10px;
+    border: 2px dashed #005bbb;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    background: #f8fbff;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+}
+
+.upload-form input[type="file"]:hover {
+    border-color: #003f7d;
+    background: #eef5ff;
+}
+
+/* === Кнопка розпізнавання === */
+.btn-recognize {
+    background: #005bbb;
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 3px 10px rgba(0,91,187,0.3);
+}
+
+.btn-recognize:hover {
+    background: #004999;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(0,91,187,0.4);
+}
+
+/* === Результат розпізнавання === */
+.result-box {
+    margin-top: 40px;
+    padding: 25px;
+    background: #f3f8ff;
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.result-box h3 {
+    color: #003f7d;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.result-box p {
+    font-size: 18px;
+    color: #333;
+}
+
+.result-box img {
+    margin-top: 20px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* === Повідомлення про помилки === */
+.error-msg {
+    background: #ffe6e6;
+    color: #d10000;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+/* === Адаптивність === */
+@media (max-width: 600px) {
+    .recognize-container {
+        margin: 60px 15px;
+        padding: 25px;
+    }
+
+    .recognize-container h2 {
+        font-size: 26px;
+    }
+
+    .btn-recognize {
+        width: 100%;
+    }
+}

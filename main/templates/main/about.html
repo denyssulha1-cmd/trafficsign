@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Про сайт | Розпізнавання дорожніх знаків</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main/about.css' %}">
+</head>
+<body>
+<header>
+    <nav>
+        <a href="{% url 'home' %}">Головна</a>
+        <a href="{% url 'about' %}">Про сайт</a>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}">Вийти</a>
+        {% else %}
+            <a href="{% url 'login' %}">Увійти</a>
+        {% endif %}
+		
+        <a href="{% url 'history' %}">Історія</a>
+<a href="{% url 'feedbacks' %}">Коментарі</a>	
+		<div class="user-status">
+            {% if user.is_authenticated %}
+                <span>Вітаємо, {{ user.last_name }} {{ user.first_name }}</span>
+            {% else %}
+                <span>Ви не ввійшли</span>
+            {% endif %}
+    </nav>
+</header>
+
+<main class="about-container">
+    <section class="about-intro">
+        <h1>Про сайт</h1>
+        <p>Цей вебсайт створено для автоматичного розпізнавання дорожніх знаків за допомогою технологій машинного навчання та комп’ютерного зору.  
+        Сервіс допомагає дослідникам, водіям і студентам краще зрозуміти, як працюють системи розпізнавання зображень у сфері транспорту.</p>
+    </section>
+
+    <section class="about-tech">
+        <h2>Використані технології</h2>
+        <div class="tech-list">
+            <div class="tech-item">
+                <img src="{% static 'main/signs/python.png' %}" alt="Python">
+                <p><b>Python</b> — основна мова програмування проєкту.</p>
+            </div>
+            <div class="tech-item">
+                <img src="{% static 'main/signs/django.png' %}" alt="Django">
+                <p><b>Django</b> — вебфреймворк для побудови сайту.</p>
+            </div>
+            <div class="tech-item">
+                <img src="{% static 'main/signs/tensorflow.png' %}" alt="TensorFlow">
+                <p><b>TensorFlow</b> — бібліотека для розпізнавання зображень.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-goal">
+        <h2>Мета проєкту</h2>
+        <p>Наша мета — зробити технології комп’ютерного зору доступними кожному.  
+        Цей проєкт демонструє, як нейронні мережі можуть аналізувати дорожні знаки,  
+        що є важливою частиною інтелектуальних транспортних систем.</p>
+    </section>
+
+    <section class="about-cta">
+        <h2>Спробуйте розпізнати знак прямо зараз!</h2>
+        <a href="{% url 'recognize' %}" class="btn-start">Перейти до розпізнавання</a>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 Розпізнавання дорожніх знаків | Усі права захищено</p>
+</footer>
+</body>
+</html>
